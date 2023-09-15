@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} {{post.title_tag}} {% endblock %}
+
+
+{% block content %}
+
+
+
+     <h1>{{post.title}}</h1><br>
+          <small>By : {{ post.author.first_name }}  
+                      {{ post.author.last_name }} - 
+                      {{post.post_date}} 
+
+
+               {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                         -<button class="btn btn-light"><a href="{% url 'update_post' post.pk %} ">
+                              Edit</a></button> - 
+                         <button  class="btn btn-light"><a href="{% url 'delete_post' post.pk %} ">
+                              Delete</a></button>
+                    {% endif %}
+               {% endif %}
+     </small><br>
+     <hr>
+     <br>
+     {% if  post.header_image %}
+     <img src="{{ post.header_image.url }}"> <br><br>
+     {% endif %}
+     {{post.body|safe}}
+
+     <br><br>
+     <a href="{% url 'home' %}"  class="btn btn-warning">Back</a>
+
+
+
+{% endblock %}

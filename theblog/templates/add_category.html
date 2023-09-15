@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title%}Create new blog post{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1>Add Blog Posts!!!!</h1>
+    <br/><br/>
+    <div class="form-group">
+        <form method = 'post'>
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <button class="btn btn-success">Post</button>
+
+
+    </div>
+    <script>
+
+        var name = "{{ user.id }}";
+        document.getElementById("c").value = name;
+    </script>
+
+{% else %}
+
+    you're not allowed here!
+    
+{% endif %}
+
+{% endblock %}
